@@ -2,7 +2,7 @@
 *.dat
 #Bup
 *~
-
+*\#*
 # Prerequisites
 *.d
 
