@@ -7,6 +7,7 @@ program  tester
   use my_prec
   use minmaxfinder
   use matrixvectormult
+  use strfinder
   implicit none
 
   integer :: i
@@ -15,6 +16,7 @@ program  tester
   real(mp), allocatable, dimension(:,:) :: A
   real(mp), allocatable, dimension(:) :: B, res, res2
   character(1) :: taskname
+  character(100) :: mystr
   ! получаем номер задания которое будем тестировать
 
   i = 0
@@ -54,9 +56,12 @@ program  tester
   case('5')
      ! Поиск подстроки в файле с использованием параллельных директив
 
+     mystr = "japan"
      call cpu_time(start)
-     ! res = mult_div_by_rows(A,B)
+     call find_in_file(trim(mystr))
      call cpu_time(finish)
+     print *, trim(mystr), " found in ", finish-start, " sec"
+
   end select
 
 

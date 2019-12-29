@@ -25,3 +25,5 @@ run1: main
 	./main 1
 run3: main
 	./main 3
+run5: main
+	./main 5

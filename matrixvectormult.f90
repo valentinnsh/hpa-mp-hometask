@@ -19,8 +19,9 @@ contains
 
     call omp_set_num_threads(threads_number)
 
-    !$omp parallel shared(A,B) default(private)
-    !$omp do schedule(dynamic)
+    !$omp parallel shared(A,B) default(private) reduction(+: res)
+
+    !$omp do schedule(guided)
     do i = 1, row
        res(i) = dot_product(A(i,:), B)
     end do
@@ -40,7 +41,7 @@ contains
     call omp_set_num_threads(threads_number)
 
     res = 0
-    !$omp parallel shared(A,B) default(private)
+    !$omp parallel shared(A,B) default(private)  reduction(+: res)
     !$omp do schedule(dynamic)
     do j = 1, col
        do i = 1, row

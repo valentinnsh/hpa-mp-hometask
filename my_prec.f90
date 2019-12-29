@@ -10,5 +10,5 @@ module my_prec
   integer, parameter :: m_size =100
   integer, parameter :: row = 4000
   integer, parameter :: col = 4000
-  integer, parameter :: threads_number = 4
+  integer, parameter :: threads_number = 3
 end module my_prec
