@@ -5,7 +5,10 @@
 !
 module my_prec
   implicit none
-  integer, parameter :: mp = 8
+  integer, parameter :: mp = 4
   real(mp), parameter :: eps = 10e-8
-  integer, parameter :: m_size = 10000
+  integer, parameter :: m_size =100
+  integer, parameter :: row = 4000
+  integer, parameter :: col = 4000
+  integer, parameter :: threads_number = 4
 end module my_prec

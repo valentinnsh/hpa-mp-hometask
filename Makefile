@@ -1,9 +1,9 @@
 files=$(filter-out $(test), $(wildcard *.f90))
 obj=$(patsubst %.f90, %.o, $(files))
+n = 1000000
 #files=$(wildcard *.f90)
 #obj=$(patsubst %.f90, %.o, $(files))
 #flags = -c -Wall -fopenmp -fbounds-check
-res: result
 
 #result: tester
 #	./tester
@@ -11,15 +11,17 @@ res: result
 #	gfortran $^ -o $@
 # %.o: %.f90
 # 	gfortran $(flags) $< -o $@
-result: main
-	./main
+result: clean run3
 main: $(obj)
-	gfortran $^  -o  $@
+	gfortran -fopenmp $^  -o  $@
 %.o %.mod: %.f90
-	gfortran -c $<
-tester.o: minmaxfinder.mod my_prec.mod
+	gfortran -fopenmp -c $<
+tester.o: my_prec.mod minmaxfinder.mod matrixvectormult.mod
 minmaxfinder.o: my_prec.mod
+matrixvectormult.o: my_prec.mod
 clean:
-	rm -f *.o main
-#run1:
-#	./main
+	rm -f *.o *.mod main
+run1: main
+	./main 1
+run3: main
+	./main 3
