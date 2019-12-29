@@ -36,3 +36,6 @@
 *.out
 *.app
 main
+
+#Archives
+*.zip
