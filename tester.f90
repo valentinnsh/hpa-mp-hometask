@@ -25,6 +25,7 @@ program  tester
   call getarg(1,taskname)
   select case(taskname)
   case('1')
+     ! Поиск максимума среди минимумов в строках матрицы
      call random_number(matrix)
      call cpu_time(start)
      val = max_min_row_el(matrix)
@@ -32,6 +33,7 @@ program  tester
      print *, "Max Min in rows = ", val
      print *, "Calculated in ", finish-start, " sec"
   case('3')
+     ! Умножение матрицы на вектор
      call RANDOM_NUMBER(A)
      call RANDOM_NUMBER(B)
 
@@ -45,8 +47,16 @@ program  tester
      call cpu_time(finish)
      print *, "div by cols Calculated in ", finish-start, " sec"
 
-     res2 = matmul(A,B)
-     print *, norm2(res2-res)
+
+     print *, 'norm(dib dy row - div by col) = ', norm2(res2-res)/row, 'if -> zero calculation is aqqurate'
+
+
+  case('5')
+     ! Поиск подстроки в файле с использованием параллельных директив
+
+     call cpu_time(start)
+     ! res = mult_div_by_rows(A,B)
+     call cpu_time(finish)
   end select
 
 
