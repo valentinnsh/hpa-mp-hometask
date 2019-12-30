@@ -64,12 +64,16 @@ program  tester
      call cpu_time(finish)
      print *, "div by cols Calculated in ", finish-start, " sec"
 
+     call cpu_time(start)
+     res2 = mult_by_blocks(A,B)
+     call cpu_time(finish)
+     print *, "div by blocks Calculated in ", finish-start, " sec"
 
      print *, 'norm(dib dy row - div by col) = ', norm2(res2-res)/row, 'if -> zero calculation is aqqurate'
 
 
   case('4')
-
+     print *, 'In progress. Will appear very soon, I promice!'
   case('5')
      ! Поиск подстроки в файле с использованием параллельных директив
 

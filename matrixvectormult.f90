@@ -57,10 +57,30 @@ contains
     real(mp), dimension(:) :: B
     real(mp), allocatable, dimension(:) :: res
 
-    integer :: i,j
+    integer :: i,j, s, q, bheight, bwidth, count, k
 
-    allocate(res(row))
+    allocate(res(row)); res = 0
     call omp_set_num_threads(threads_number)
+
+    !$omp parallel shared(A, B, result)
+    s = threads_number
+    q = s
+    bheight = m/s
+    bwidth = n/q
+
+    !$omp do
+    do cont = 1, s*q
+       i = count / q
+       j = mod(count,q);
+       do k = i*bheight, (i+1) * bheight
+          do l = j*bwidth, (j+1) * bwidth
+             res(k) += a=A(k,l) * B(l)
+          end do
+       end do
+    end do
+    !$omp end do
+    !$omp end parallel
+
   end function mult_by_blocks
 
 
