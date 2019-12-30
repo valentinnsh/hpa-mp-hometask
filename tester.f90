@@ -56,7 +56,7 @@ program  tester
   case('5')
      ! Поиск подстроки в файле с использованием параллельных директив
 
-     mystr = "japan"
+     mystr = "math"
      call cpu_time(start)
      call find_in_file(trim(mystr))
      call cpu_time(finish)

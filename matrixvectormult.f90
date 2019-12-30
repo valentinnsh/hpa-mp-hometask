@@ -42,7 +42,7 @@ contains
 
     res = 0
     !$omp parallel shared(A,B) default(private)  reduction(+: res)
-    !$omp do schedule(dynamic)
+    !$omp do schedule(auto)
     do j = 1, col
        do i = 1, row
           res(i) = res(i) + A(i,j)*B(j)

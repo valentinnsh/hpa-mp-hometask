@@ -11,7 +11,7 @@ n = 1000000
 #	gfortran $^ -o $@
 # %.o: %.f90
 # 	gfortran $(flags) $< -o $@
-result: clean run3
+result: clean run5
 main: $(obj)
 	gfortran -fopenmp $^  -o  $@
 %.o %.mod: %.f90

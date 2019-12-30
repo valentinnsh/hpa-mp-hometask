@@ -19,25 +19,28 @@ contains
   subroutine find_in_file(str)
     character(len = *) :: str
     character(len = 100) :: tmp_s
-    integer :: i, n
+    integer :: i, n, line_count
     open(10, file = 'data.dat')
 
     read(10,'(2x,I6)') n
 
-    !$omp parallel shared(str) default(private)
-    !$omp do schedule(dynamic)
-    do i = 1,n
+    line_count = 1
+    !$omp parallel shared(str,n, line_count) default(private)
+    !$omp do schedule(auto)
+    do i = 1, n
+
+       !$omp critical
        read(10,'(A)') tmp_s
+       line_count = line_count + 1
        tmp_s = trim(tmp_s)
        if(index(tmp_s, str) .ne. 0)then
-          print *, str, ' is found at index: ', index(tmp_s, str), ' at the line n = ', i
+          print *, str, ' is found at index: ', index(tmp_s, str), ' at the line n = ', line_count
        end if
+       !$omp end critical
+
     end do
     !$omp end do
     !$omp end parallel
-    if (i .eq. n) then
-       print *, "cant find ", str
-    end if
 
   end subroutine find_in_file
 
